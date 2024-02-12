@@ -111,6 +111,12 @@ add another user to my friend list
 So that
 I can see them in the Friends sidebar
 
+As a user 
+
+I want to be able to find players across multiple games 
+
+to help build online collaborative friendships. 
+
 # Create party from friend list
 As an
 authenticated user
@@ -141,6 +147,18 @@ enter a specific lobby for the game and/or competitive level of my choice
 So that
 I can be matched with players who want to play the same thing I do
 
+As a user
+
+I want to be able to mute people in the matchmaking lobby 
+
+to avoid toxic or vulgar communications with those people. 
+
+As a user 
+
+I want to be notified in real time of players inviting me to lobby 
+
+so that I can join the lobby and find a game with them. 
+
 # Remove friend
 As an
 authenticated user with friends
@@ -160,6 +178,7 @@ block a player from their profile
 
 So that
 I will not be matched with them in the future
+ 
 
 # Message friend
 As an
@@ -170,6 +189,12 @@ send a message to a user in my friends list
 
 So that
 we can communicate about parties or games
+
+As a user
+
+I want to be able to login to the service and then see which of my friends are online in real time 
+
+to be able to interact with them. 
 
 # See users recently played with
 As an
