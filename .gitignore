@@ -19,6 +19,8 @@ dist/
 .project
 .settings/
 bin/
+.vscode/*
+!.vscode/launch.json
 
 # Java - backend
 target/
