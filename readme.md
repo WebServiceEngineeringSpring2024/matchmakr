@@ -22,6 +22,9 @@ Our [Axure prototype](https://pyg1ke.axshare.com/?id=1p68ca&p=login&sc=2 )
 
 <p>The Figma prototype, with the ability to navigate between screens like a real web app's front end</p><br/>
 
+Our [Sprint 1 Burndown Chart](https://raw.githubusercontent.com/RoopleDoops/WebServiceEng/main/docs/Sprint1%20Burndown.png) 
+<br/>
+
 ### Sprint 2
 
 
