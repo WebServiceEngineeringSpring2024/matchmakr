@@ -9,7 +9,7 @@ env:
   WORKDIR: ./WebServiceEngFE
 defaults:
   run:
-    working-directory: ${{env.WORKDIR}} # only works for the run steps
+    working-directory: ${{WORKDIR}} # only works for the run steps
 
 jobs:
   build:
