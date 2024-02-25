@@ -14,7 +14,7 @@ env:
   NODEVER: 18
 
 jobs:
-  build:
+  node-build:
     runs-on: ubuntu-latest
     defaults:
       run:
