@@ -15,7 +15,7 @@ env:
 
 jobs:
 
-  node-build:
+  node-build-and-test:
     runs-on: ubuntu-latest
 
     defaults:
