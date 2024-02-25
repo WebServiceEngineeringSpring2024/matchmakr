@@ -18,7 +18,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
       with:
-        sparse-checkout: '../WebServiceEngFE'
+        sparse-checkout: 'WebServiceEngFE'
 
     - name: diagnostics
       run: pwd && ls -la && ls -la ../ && ls -la ../../
