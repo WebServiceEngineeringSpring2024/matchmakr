@@ -21,11 +21,11 @@ jobs:
       with:
         sparse-checkout: 'WebServiceEngFE'
 
-    - name: diagnostics
-      run: pwd && ls -la && ls -la ../
-      continue-on-error: true
-
-    - name: Use Node.js
+#    - name: diagnostics
+#      run: pwd && ls -la && ls -la ../
+#      continue-on-error: true
+#
+#    - name: Use Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '18'
