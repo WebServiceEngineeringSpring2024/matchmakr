@@ -22,14 +22,14 @@ jobs:
         sparse-checkout: 'WebServiceEngFE'
 
     - name: diagnostics
-      run: pwd && ls -la && ls -la ../
+      run: pwd && ls -la && ls -la ../ && ls -la ../../
       continue-on-error: true
 
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
 #        node-version: '18'
-        node-version-file: 'package.json'
+        node-version-file: 'WebServiceEngFE/package.json'
         cache: 'npm'
 
     - name: Install dependencies
