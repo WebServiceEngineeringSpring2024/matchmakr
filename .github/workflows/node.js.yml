@@ -6,7 +6,7 @@ name: Node.js CI
 on: push
 
 env:
-  WORKDIR: "./WebServiceEngFE"
+  WORKDIR: ./WebServiceEngFE
   AAA: "aaa"
   BBB: bbb
 
@@ -21,7 +21,7 @@ jobs:
     - name: diagnostics
       run: pwd && ls -la && ls -la ../ && ls -la ../../
       continue-on-error: true
-    - run: cd $WORKDIR
+    - run: cd ${{ env.WORKDIR }}
     - name: diagnostics
       run: pwd && ls -la && ls -la ../ && ls -la ../../
       continue-on-error: true
@@ -29,7 +29,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
 #        node-version: 18
-        node-version-file: "${{ env.WORKDIR }}/package.json"
+        node-version-file: ${{ env.WORKDIR }}/package.json
         cache: 'npm'
         cache-dependency-path: "${{ env.WORKDIR }}/package-lock.json"
     - name: Install dependencies
