@@ -35,5 +35,13 @@ jobs:
       run: npm ci
     - name: Build
       run: npm run build --if-present
+
+  node-test:
+    needs: node-build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKDIR }}
+    steps:
     - name: Run tests
       run: npm test
