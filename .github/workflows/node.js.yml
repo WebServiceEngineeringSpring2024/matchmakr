@@ -6,8 +6,8 @@ name: Node.js CI
 on:
   push:
     paths:
-      - './WebServiceEngFE/**'
-      - './.github/workflows'
+      - 'WebServiceEngFE/**'
+      - '.github/workflows/**'
 
 env:
   WORKDIR: ./WebServiceEngFE
