@@ -7,8 +7,9 @@ on: push
 
 env:
   WORKDIR: ./WebServiceEngFE
-  AAA: "aaa"
-  BBB: bbb
+defaults:
+  run:
+    working-directory: ${{ env.WORKDIR }}
 
 jobs:
   build:
@@ -21,17 +22,13 @@ jobs:
     - name: diagnostics
       run: pwd && ls -la && ls -la ../ && ls -la ../../
       continue-on-error: true
-    - run: cd ${{ env.WORKDIR }}
-    - name: diagnostics
-      run: pwd && ls -la && ls -la ../ && ls -la ../../
-      continue-on-error: true
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
 #        node-version: 18
         node-version-file: ${{ env.WORKDIR }}/package.json
         cache: 'npm'
-        cache-dependency-path: "${{ env.WORKDIR }}/package-lock.json"
+        cache-dependency-path: ${{ env.WORKDIR }}/package-lock.json
     - name: Install dependencies
       run: npm ci
     - name: Build
