@@ -15,7 +15,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
       with:
-        sparse-checkout: $WORKDIR
+        sparse-checkout: ${{ env.WORKDIR }}
     - name: diagnostics
       run: pwd && ls -la && ls -la ../ && ls -la ../../
       continue-on-error: true
