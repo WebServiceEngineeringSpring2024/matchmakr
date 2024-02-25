@@ -18,10 +18,11 @@ jobs:
 
     - name: Check out code
       uses: actions/checkout@v4
-      run: pwd
-      run: ls -la
 #      with:
 #        sparse-checkout: 'WebServiceEngFE'
+
+    - name: diagnostics
+      run: pwd && ls -la
 
     - name: Use Node.js 18.x
       uses: actions/setup-node@v3
