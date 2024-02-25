@@ -13,13 +13,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
 
     - name: Check out code
       uses: actions/checkout@v4
       with:
-        sparse-checkout: 'WebServiceEngFE'
+        sparse-checkout: '../WebServiceEngFE'
 
     - name: diagnostics
       run: pwd && ls -la && ls -la ../ && ls -la ../../
@@ -28,9 +27,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-#        node-version: '18'
-        node-version-file: 'WebServiceEngFE/package.json'
-        cache: 'npm'
+        node-version-file: 'package.json'
 
     - name: Install dependencies
       run: npm ci
