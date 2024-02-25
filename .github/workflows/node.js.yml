@@ -9,11 +9,11 @@ env:
   WORKDIR: ./WebServiceEngFE
 
 jobs:
-  defaults:
-    run:
-      working-directory: ${{ env.WORKDIR }}
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKDIR }}
     steps:
     - name: Check out code
       uses: actions/checkout@v4
