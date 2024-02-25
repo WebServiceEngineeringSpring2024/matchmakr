@@ -18,16 +18,16 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
       with:
-        sparse-checkout: $WORKDIR
+        sparse-checkout: ${{WORKDIR}}
     - name: diagnostics
       run: pwd && ls -la && ls -la ../ && ls -la ../../
       continue-on-error: true
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-version-file: $WORKDIR/package.json
+        node-version-file: ${{WORKDIR}}/package.json
         cache: 'npm'
-        cache-dependency-path: $WORKDIR/package-lock.json
+        cache-dependency-path: ${{WORKDIR}}/package-lock.json
     - name: Install dependencies
       run: npm ci
     - name: Build
