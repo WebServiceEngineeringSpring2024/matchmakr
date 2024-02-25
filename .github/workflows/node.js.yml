@@ -7,7 +7,7 @@ on: [push]
 
 defaults:
   run:
-    working-directory: '/WebServiceEngFE'
+    working-directory: 'WebServiceEngFE'
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        sparse-checkout: '/WebServiceEngFE'
+        sparse-checkout: 'WebServiceEngFE'
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
