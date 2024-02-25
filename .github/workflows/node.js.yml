@@ -3,11 +3,11 @@
 
 name: Node.js CI
 
-on: [push]
+on: 'push'
 
 defaults:
   run:
-    working-directory: 'WebServiceEng/WebServiceEngFE'
+    working-directory: 'WebServiceEngFE'
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
 #        sparse-checkout: 'WebServiceEngFE'
 
     - name: diagnostics
-      uses: actions/bash@v1
+      allows-failure: true
       run: pwd && ls -la
 
     - name: Use Node.js 18.x
