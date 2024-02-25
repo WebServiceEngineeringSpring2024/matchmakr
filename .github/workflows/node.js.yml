@@ -43,11 +43,11 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-    - name: dollar
-      continue-on-error: true
-      run: |
-        echo $AAA
-        echo $BBB
+#    - name: dollar
+#      continue-on-error: true
+#      run: |
+#        echo $AAA
+#        echo $BBB
     - name: brackets
       continue-on-error: true
       run: |
