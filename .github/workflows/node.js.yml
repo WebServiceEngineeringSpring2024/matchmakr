@@ -48,11 +48,11 @@ jobs:
 #      run: |
 #        echo $AAA
 #        echo $BBB
-    - name: brackets
-      continue-on-error: true
-      run: |
-        echo ${{AAA}}
-        echo ${{BBB}}
+#    - name: brackets
+#      continue-on-error: true
+#      run: |
+#        echo ${{AAA}}
+#        echo ${{BBB}}
     - name: env
       continue-on-error: true
       run: |
