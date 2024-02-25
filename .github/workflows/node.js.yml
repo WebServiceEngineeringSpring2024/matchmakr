@@ -7,6 +7,8 @@ on: push
 
 env:
   WORKDIR: "./WebServiceEngFE"
+  AAA: "aaa"
+  BBB: bbb
 
 jobs:
   build:
@@ -26,9 +28,10 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
+#        node-version: 18
         node-version-file: "${{ env.WORKDIR }}/package.json"
         cache: 'npm'
-        cache-dependency-path: ${{ env.WORKDIR }}/package-lock.json
+        cache-dependency-path: "${{ env.WORKDIR }}/package-lock.json"
     - name: Install dependencies
       run: npm ci
     - name: Build
@@ -36,4 +39,37 @@ jobs:
     - name: Run tests
       run: npm test
 
-#  deploy:
+  testing:
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: dollar
+      continue-on-error: true
+      run: |
+        echo $AAA
+        echo $BBB
+    - name: brackets
+      continue-on-error: true
+      run: |
+        echo ${{AAA}}
+        echo ${{BBB}}
+    - name: env
+      continue-on-error: true
+      run: |
+        echo ${{ env.AAA }}
+        echo ${{ env.BBB }}
+    - name: quotes
+      continue-on-error: true
+      run: |
+        echo "$AAA"
+        echo "$BBB"
+    - name: quote brackets
+      continue-on-error: true
+      run: |
+        echo "${{AAA}}"
+        echo "${{BBB}}"
+    - name: quote env
+      continue-on-error: true
+      run: |
+        echo "${{ env.AAA }}"
+        echo "${{ env.BBB }}"
