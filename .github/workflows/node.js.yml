@@ -22,8 +22,7 @@ jobs:
         sparse-checkout: 'WebServiceEngFE'
 
     - name: diagnostics
-      run: pwd && ls -la
-      run: ls -la ../
+      run: pwd && ls -la && ls -la ../
       continue-on-error: true
 
     - name: Use Node.js
