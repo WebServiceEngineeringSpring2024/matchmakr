@@ -7,7 +7,7 @@ on: 'push'
 
 defaults:
   run:
-    working-directory: 'WebServiceEngFE'
+    working-directory: './WebServiceEngFE'
 
 jobs:
   build:
@@ -17,8 +17,8 @@ jobs:
 
     - name: Check out code
       uses: actions/checkout@v4
-      with:
-        sparse-checkout: 'WebServiceEngFE'
+#      with:
+#        sparse-checkout: 'WebServiceEngFE'
 
     - name: diagnostics
       run: pwd && ls -la && ls -la ../ && ls -la ../../
@@ -27,7 +27,9 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-version-file: 'package.json'
+        node-version-file: './WebServiceEngFE/package.json'
+        cache: 'npm'
+        cache-dependency-path: './WebServiceEngFE/package-lock.json'
 
     - name: Install dependencies
       run: npm ci
