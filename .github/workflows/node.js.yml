@@ -6,15 +6,14 @@ name: Node.js CI
 on:
   push:
     paths:
-      - 'WebServiceEngFE/**'
-      - '.github/workflows/**'
+      - "WebServiceEngFE/**"
+      - ".github/workflows/**"
 
 env:
   WORKDIR: ./WebServiceEngFE
-  NODEVER: 18
+  NODE_VERSION: 18
 
 jobs:
-
   node-build-and-test:
     runs-on: ubuntu-latest
 
@@ -23,24 +22,53 @@ jobs:
         working-directory: ${{ env.WORKDIR }}
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: ${{ env.WORKDIR }}
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: ${{ env.WORKDIR }}
 
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODEVER }}
-        node-version-file: ${{ env.WORKDIR }}/package.json
-        cache: 'npm'
-        cache-dependency-path: ${{ env.WORKDIR }}/package-lock.json
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          node-version-file: ${{ env.WORKDIR }}/package.json
+          cache: "npm"
+          cache-dependency-path: ${{ env.WORKDIR }}/package-lock.json
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build
-      run: npm run build --if-present
+      - name: Build
+        run: npm run build --if-present
 
-    - name: Run tests
-      run: npm test
+      - name: Run tests
+        run: npm test
+
+      - name: Upload artifact for deployment job
+        # if: github.ref_name == 'main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-app
+
+  node-deploy:
+    needs: node-build-and-test
+    # if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    environment:
+      name: "production"
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from node-build-and-test job
+        uses: actions/download-artifact@v3
+        with:
+          name: node-app
+
+      - name: "Deploy to Azure Web App"
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "matchmakr"
+          slot-name: "production"
+          package: .
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
