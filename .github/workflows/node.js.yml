@@ -7,8 +7,8 @@ name: Node.js CI
 on:
   push:
     paths:
-      - "WebServiceEngFE/**"
-      - ".github/workflows/**"
+      - ${{vars.FE_WORKDIR}}/**
+      - .github/workflows/**
 
 jobs:
   node-build-and-test:
@@ -67,7 +67,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "matchmakr"
+          app-name: ${{vars.WEBAPP_NAME}}
           slot-name: "production"
           package: .
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
