@@ -1,4 +1,5 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests
+# Then it will save the build artifacts and deploy to Azure Web App
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: Node.js CI
@@ -9,31 +10,27 @@ on:
       - "WebServiceEngFE/**"
       - ".github/workflows/**"
 
-env:
-  WORKDIR: ./WebServiceEngFE
-  NODE_VERSION: 18
-
 jobs:
   node-build-and-test:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ${{ env.WORKDIR }}
+        working-directory: ${{vars.FE_WORKDIR}}
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
         with:
-          sparse-checkout: ${{ env.WORKDIR }}
+          sparse-checkout: ${{vars.FE_WORKDIR}}
 
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          node-version-file: ${{ env.WORKDIR }}/package.json
+          node-version: ${{vars.NODE_VERSION}}
+          node-version-file: ${{vars.FE_WORKDIR}}/package.json
           cache: "npm"
-          cache-dependency-path: ${{ env.WORKDIR }}/package-lock.json
+          cache-dependency-path: ${{vars.FE_WORKDIR}}/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -49,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: ${{ env.WORKDIR }}/dist
+          path: ${{vars.FE_WORKDIR}}/dist
 
   node-deploy:
     needs: node-build-and-test
@@ -63,7 +60,7 @@ jobs:
       - name: Download artifact from node-build-and-test job
         uses: actions/download-artifact@v4
         with:
-          path: ${{ env.WORKDIR }}/dist
+          path: ${{vars.FE_WORKDIR}}/dist
           name: node-app
 
       - name: "Deploy to Azure Web App"
