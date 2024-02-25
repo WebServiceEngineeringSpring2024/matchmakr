@@ -22,6 +22,7 @@ jobs:
 #        sparse-checkout: 'WebServiceEngFE'
 
     - name: diagnostics
+      uses: actions/bash@v1
       run: pwd && ls -la
 
     - name: Use Node.js 18.x
