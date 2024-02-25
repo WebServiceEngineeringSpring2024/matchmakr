@@ -7,11 +7,11 @@ on: push
 
 env:
   WORKDIR: ./WebServiceEngFE
-defaults:
-  run:
-    working-directory: ${{ env.WORKDIR }}
 
 jobs:
+  defaults:
+    run:
+      working-directory: ${{ env.WORKDIR }}
   build:
     runs-on: ubuntu-latest
     steps:
