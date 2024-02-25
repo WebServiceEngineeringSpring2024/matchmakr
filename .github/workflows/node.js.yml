@@ -63,11 +63,11 @@ jobs:
       run: |
         echo "$AAA"
         echo "$BBB"
-    - name: quote brackets
-      continue-on-error: true
-      run: |
-        echo "${{AAA}}"
-        echo "${{BBB}}"
+#    - name: quote brackets
+#      continue-on-error: true
+#      run: |
+#        echo "${{AAA}}"
+#        echo "${{BBB}}"
     - name: quote env
       continue-on-error: true
       run: |
