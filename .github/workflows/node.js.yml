@@ -22,8 +22,8 @@ jobs:
 #        sparse-checkout: 'WebServiceEngFE'
 
     - name: diagnostics
-      allows-failure: true
       run: pwd && ls -la
+      continue-on-error: true
 
     - name: Use Node.js 18.x
       uses: actions/setup-node@v3
