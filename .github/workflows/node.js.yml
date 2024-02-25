@@ -9,6 +9,7 @@ on:
     paths:
       - $vars.FE_WORKDIR/**
       - .github/workflows/**
+  workflow_dispatch: # allows manual execution of the workflow
 
 jobs:
   node-build-and-test:
