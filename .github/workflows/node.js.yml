@@ -29,7 +29,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{vars.NODE_VERSION}}
-          node-version-file: ${{vars.FE_WORKDIR}}/package.json
           cache: "npm"
           cache-dependency-path: ${{vars.FE_WORKDIR}}/package-lock.json
 
@@ -68,7 +67,7 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip ${{vars.FE_WORKDIR}}/release.zip
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
