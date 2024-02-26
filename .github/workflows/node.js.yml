@@ -75,5 +75,5 @@ jobs:
         with:
           app-name: ${{vars.WEBAPP_NAME}}
           slot-name: "production"
-          # package: ${{vars.FE_WORKDIR}}
+          package: ${{vars.FE_WORKDIR}}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
