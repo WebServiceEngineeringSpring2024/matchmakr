@@ -71,9 +71,9 @@ jobs:
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v2
         with:
           app-name: ${{vars.WEBAPP_NAME}}
           slot-name: "production"
-          package: .
+          package: ${{vars.FE_WORKDIR}}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
