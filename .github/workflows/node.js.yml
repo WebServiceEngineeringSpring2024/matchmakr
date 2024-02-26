@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    paths:
-      - 'WebServiceEngFE/**'
-      - '.github/workflows/**'
+    # paths: # doesn't work with required checks :(
+    #   - 'WebServiceEngFE/**'
+    #   - '.github/workflows/**'
 
 env:
   WORKDIR: ./WebServiceEngFE
@@ -16,6 +16,7 @@ env:
 jobs:
 
   node-build-and-test:
+    if: 
     runs-on: ubuntu-latest
 
     defaults:
