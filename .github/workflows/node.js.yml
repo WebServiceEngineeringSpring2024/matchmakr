@@ -1,4 +1,5 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests
+# Then it will save the build artifacts and deploy to Azure Web App
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: Node.js CI
@@ -8,40 +9,43 @@ on:
     # paths: # doesn't work with required checks :(
     #   - 'WebServiceEngFE/**'
     #   - '.github/workflows/**'
-
-env:
-  WORKDIR: ./WebServiceEngFE
-  NODEVER: 18
+  workflow_dispatch: # allows manual execution of the workflow
 
 jobs:
-
   node-build-and-test:
-    if: 
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ${{ env.WORKDIR }}
+        working-directory: ${{vars.FE_WORKDIR}}
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v4
-      with:
-        sparse-checkout: ${{ env.WORKDIR }}
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: ${{vars.FE_WORKDIR}}
 
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODEVER }}
-        node-version-file: ${{ env.WORKDIR }}/package.json
-        cache: 'npm'
-        cache-dependency-path: ${{ env.WORKDIR }}/package-lock.json
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{vars.NODE_VERSION}}
+          cache: "npm"
+          cache-dependency-path: ${{vars.FE_WORKDIR}}/package-lock.json
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build
-      run: npm run build --if-present
+      - name: Build
+        run: npm run build --if-present
 
-    - name: Run tests
-      run: npm test
+      - name: Run tests
+        run: npm test
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{vars.WEBAPP_NAME}}
+          slot-name: "production"
+          package: ${{vars.FE_WORKDIR}}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
