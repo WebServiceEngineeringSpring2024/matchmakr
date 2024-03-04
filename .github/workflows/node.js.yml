@@ -6,9 +6,9 @@ name: Node.js CI
 
 on:
   push:
-    paths:
-      - $vars.FE_WORKDIR/**
-      - .github/workflows/**
+    # paths: # doesn't work with required checks :(
+    #   - 'WebServiceEngFE/**'
+    #   - '.github/workflows/**'
   workflow_dispatch: # allows manual execution of the workflow
 
 jobs:
