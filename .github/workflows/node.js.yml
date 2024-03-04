@@ -41,35 +41,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment job
-        # if: github.ref_name == 'main'
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-app
-          path: ${{vars.FE_WORKDIR}}/release.zip
-
-  node-deploy:
-    needs: node-build-and-test
-    # if: github.ref_name == 'main'
-    runs-on: ubuntu-latest
-    environment:
-      name: "production"
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from node-build-and-test job
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{vars.FE_WORKDIR}}
-          name: node-app
-
-      - name: Unzip artifact for deployment
-        run: unzip ${{vars.FE_WORKDIR}}/release.zip
-
-      - name: "Deploy to Azure Web App"
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
