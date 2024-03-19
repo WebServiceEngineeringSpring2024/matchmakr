@@ -1,0 +1,6 @@
+[submodule "matchmakr-application"]
+	path = matchmakr-application
+	url = git@github.com:WebServiceEngineeringSpring2024/matchmakr-application.git
+[submodule "matchmakr-service"]
+	path = matchmakr-service
+	url = git@github.com:WebServiceEngineeringSpring2024/matchmakr-service.git
